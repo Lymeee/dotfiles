@@ -1,0 +1,31 @@
+:root {
+  --background-base: #373b3e;
+  --background-highlight: #373b3e;
+  --background-press: #2e3133;
+
+  --text-base: #bec8d1;
+  --text-subdued: #8bd5ca;
+  --text-bright-accent: #e12885;
+
+  --button-secondary-background: #137a7f;
+  --button-secondary-border: #86cecb;
+  --button-secondary-hover: #e12885;
+
+  --main-color: #86cecb;
+  --accent-color: #8bd5ca;
+  --highlight-color: #e12885;
+
+  --player-background: #373b3e;
+  --card-color: #373b3e;
+  --misc: #86cecb;
+}
+
+.main-rootview,
+.main-nowPlayingBar,
+.main-view-container,
+.main-card-card,
+.main-contextMenu-menu {
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
+}
+
