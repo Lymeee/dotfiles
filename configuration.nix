@@ -7,19 +7,17 @@
     ./modules
   ];
 
-  services.displayManager.defaultSession = "hyprland";
-
   services.upower.enable = true;
 
-  # Enable Hyprland system-wide
-  #programs.hyprland = {
-  # enable = true;
-  # package = pkgs.hyprland;
-  #};
+  #Enable Hyprland system-wide
+  programs.hyprland = {
+    enable = true;
+    package = pkgs.hyprland;
+  };
 
-  # Force session file to exist
-  #environment.etc."wayland-sessions/hyprland.desktop".source =
-  # "${pkgs.hyprland}/share/wayland-sessions/hyprland.desktop";
+  #Force session file to exist
+  environment.etc."wayland-sessions/hyprland.desktop".source =
+  "${pkgs.hyprland}/share/wayland-sessions/hyprland.desktop";
 
   programs.fish.enable = true;
   users.users.lymee.shell = pkgs.fish;

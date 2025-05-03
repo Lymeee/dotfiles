@@ -4,10 +4,11 @@
   # Allow unfree packages for discord, etc.
   nixpkgs.config.allowUnfree = true;
 
+
   home = {
     username = "lymee";
     homeDirectory = "/home/lymee";
-    stateVersion = "25.05"; 
+    stateVersion = "25.05";
   };
   
 
@@ -15,7 +16,7 @@
     ./homemodules
     ./terminal
     ./nvim
-    ./KDE
+    ./hypr
   ];
 
   home.packages = with pkgs; [

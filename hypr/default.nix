@@ -4,5 +4,6 @@
     ./waybar.nix
     ./keybinds.nix
     ./cursor.nix
+    ./hyprland.nix
     ];
 }

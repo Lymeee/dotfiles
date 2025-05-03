@@ -11,12 +11,6 @@ let
   };
 in
 {
-  # Cursor setup (rely on imported cursor.nix)
-  home.pointerCursor = {
-    name = "miku-cursor-linux";
-    size = 30;
-  };
-
   # Qt + Kvantum theming
   qt = {
     enable = true;

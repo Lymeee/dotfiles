@@ -1,14 +1,14 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   services.displayManager = {
-    defaultSession = "plasma";
+    defaultSession = "hyprland";
 
     sddm = {
       enable = true;
       wayland.enable = true;
       theme = "sddm-astronaut-theme";
-      package = pkgs.kdePackages.sddm;
+      package = lib.mkForce pkgs.kdePackages.sddm;
       extraPackages = [ pkgs.sddm-astronaut ];
 
       settings = {
@@ -30,8 +30,6 @@
   environment.etc."sddm/themes/sddm-astronaut-theme/Backgrounds/japanese_aesthetic.png".source =
     "/home/lymee/images/misc/mikulock.jpg";
 
-  services.xserver.enable = true;
-  services.xserver.desktopManager.plasma6.enable = true;
 }
 
 

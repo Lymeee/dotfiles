@@ -3,7 +3,6 @@
 {
   # Enable base X11 support and Plasma
   services.xserver.enable = true;
-  services.xserver.desktopManager.plasma6.enable = true;
 
   # Plasma 6 Desktop Environment (Wayland + all core services)
   services.desktopManager.plasma6.enable = true;
@@ -12,13 +11,15 @@
   programs.dconf.enable = true;
 
   # Optional: Install only core KDE system packages
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs.kdePackages; [
     plasma-workspace
     plasma-desktop
     kde-cli-tools
     kde-gtk-config
     systemsettings
-    qt6.qtwayland
+  ] ++ [
+    pkgs.qt6.qtwayland
   ];
+
 }
 

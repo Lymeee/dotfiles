@@ -6,6 +6,5 @@
     ./sddm.nix
     ./fans.nix
     ./boot.nix
-    ./kde.nix
   ];
 }
