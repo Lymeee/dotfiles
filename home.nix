@@ -33,11 +33,11 @@
     prismlauncher
     xfce.thunar
     ueberzugpp  # images in terminal
-    discord
     firefox-devedition-bin
     obs-studio
     vlc
     git
+    webcord
   ];
 
   programs.home-manager.enable = true;

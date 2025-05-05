@@ -3,7 +3,7 @@
   imports = [
     ./steam.nix
     ./fonts.nix
-    ./sddm.nix
+    ./greetd.nix
     ./fans.nix
     ./boot.nix
   ];

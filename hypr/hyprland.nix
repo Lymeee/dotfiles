@@ -99,6 +99,8 @@
       workspace = 9, monitor:HDMI-A-2, persistent:true;
       workspace = 10, monitor:HDMI-A-2, persistent:true;
 
+      layerrule = blur, wofi
+      layerrule = ignorezero, wofi
 
       exec-once = hyprpaper
     '';

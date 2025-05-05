@@ -31,8 +31,8 @@
       bind = $mainMod, T, exec, kitty
       bind = $mainMod, F, exec, /home/lymee/bin/firefox-safe
       bind = $mainMod, S, exec, steam
-      bind = $mainMod, D, exec, discord
-      bind = $mainMod, A, exec, rofi -show drun
+      bind = $mainMod, D, exec, webcord
+      bind = $mainMod, A, exec, wofi -show drun
       bind = $mainMod SHIFT, S, exec, hyprshot -m region -c --save-path /home/lymee/images/screenshots
       bind = , Print, exec, hyprshot -m output -o DP-2 -c --save-path /home/lymee/images/screenshots
 
@@ -118,8 +118,9 @@
       bind = CTRL SHIFT, j, resizeactive, 0 15
 
       # Rules
-      windowrulev2 = workspace 6 silent, class:^(discord)$
+      windowrulev2 = workspace 6 silent, class:^(webcord)$
       windowrulev2 = workspace 2 silent, class:^(steam)$
+      windowrulev2 = workspace 2 silent, class:^(steam_app_.*)$
 
       exec-once = mako
       exec-once = waybar

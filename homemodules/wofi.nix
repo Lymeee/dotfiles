@@ -2,106 +2,87 @@
 
 let
   miku = {
-    background = "#373b3e";         # charcoal background
-    text       = "#bec8d1";         # light text
-    highlight  = "#86cecb";         # teal highlight
-    hover      = "#e12885";         # pink hover
-    border     = "#137a7f";         # teal border
-    accent     = "#8bd5ca";         # accent color (Miku teal)
+    background = "#373b3e";  # charcoal
+    text       = "#bec8d1";  # light gray
+    highlight  = "#86cecb";  # teal
+    hover      = "#e12885";  # pink
+    border     = "#137a7f";  # dark teal
+    accent     = "#8bd5ca";  # bright teal
   };
 in {
-  home.packages = with pkgs; [
-    wofi
-    numix-icon-theme-circle  # Ensure icon theme is available
-  ];
+  programs.wofi = {
+    enable = true;
+    settings = {
+      show = "drun";
+      prompt = "Search:";
+      term = "kitty";
+      location = "center";
+      width = 600;
+      height = 400;
+      lines = 10;
+      columns = 1;
+      allow_markup = true;
+      no_actions = true;
+      insensitive = true;
+      hide_scroll = true;
+      normal_window = false; # use layer shell for blur + Hyprland support
+    };
 
-  # Define Wofi configuration for the appearance
-  xdg.configFile."wofi/style.css".text = ''
-    * {
-      font-family: JetBrainsMono Nerd Font;
-      font-size: 14px;
-      color: ${miku.text};
-      border: none;
-    }
+    style = ''
+      * {
+        font-family: "Fira Sans", sans-serif;
+        font-size: 14px;
+        border: none;
+        outline: none;
+      }
 
-    window {
-      background-color: ${miku.background};
-      border: 2px solid ${miku.border};
-      border-radius: 10px;
-      opacity: 0.9;  /* Transparency */
-    }
+      window {
+        background-color: rgba(55, 59, 62, 0.85); /* semi-transparent charcoal */
+        border-radius: 10px;
+        color: ${miku.text};
+      }
 
-    mainbox {
-      background-color: ${miku.background};
-    }
+      #outer-box {
+        margin: 8px;
+        padding: 10px;
+        box-shadow: none;
+      }
 
-    #input {
-      margin: 10px;
-      padding: 6px 10px;
-      border: 2px solid ${miku.border};
-      background-color: ${miku.background};
-      color: ${miku.text};
-      border-radius: 5px;
-      opacity: 0.9;  /* Transparency */
-    }
+      #input {
+        margin: 8px;
+        padding: 8px;
+        background-color: rgba(255, 255, 255, 0.07);
+        color: ${miku.text};
+        border-radius: 6px;
+      }
 
-    #entry:selected {
-      background-color: ${miku.highlight};
-      color: ${miku.background};
-    }
+      #inner-box {
+        margin: 4px;
+        background-color: transparent;
+      }
 
-    #entry:hover {
-      background-color: ${miku.hover};
-      color: ${miku.background};
-    }
+      #entry {
+        padding: 6px;
+        margin: 2px;
+        border-radius: 6px;
+      }
 
-    #entry {
-      padding: 8px;
-      margin: 2px;
-      border-radius: 3px;
-      background-color: rgba(0, 0, 0, 0.3);  /* Slightly transparent entries */
-      color: rgba(195, 231, 237, 1);
-      transition: background 0.3s ease-out;
-    }
+      #entry:selected {
+        background-color: rgba(19, 122, 127, 0.8); /* dark teal */
+        border-left: 4px solid ${miku.hover}; /* pink accent */
+      }
 
-    #entry.selected {
-      background-color: ${miku.highlight};
-      color: ${miku.background};
-      font-weight: bold;
-    }
+      #text {
+        color: ${miku.text};
+      }
 
-    #img {
-      margin-right: 10px;
-      border-radius: 6px;
-      background-color: transparent;
-      min-width: 0px;
-      min-height: 0px;
-    }
+      #text:selected {
+        color: white;
+      }
+    '';
+  };
 
-    #text {
-      color: inherit;
-      font-size: 14px;
-      margin-left: 4px;
-    }
-  '';
-
-  # Define Wofi config options
-  xdg.configFile."wofi/config".text = ''
-    modi: "drun"
-    icon-theme: "Numix-Circle"  # Ensure icons are enabled in Wofi
-    font: "JetBrains Mono Regular 13"
-    show-icons: true
-    terminal: "wezterm"
-    drun-display-format: "{icon} {name}"
-    location: 0
-    disable-history: false
-    hide-scrollbar: true
-    display-drun: "   Apps "
-    sidebar-mode: true
-    border-radius: 10
-    normal_window=true  # Ensures the wofi window behaves as a normal window
-    width=600
-    height=400
-  '';
+  # Optional: install wofi explicitly in case another module doesn't
+  home.packages = with pkgs; [ wofi ];
 }
 

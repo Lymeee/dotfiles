@@ -28,7 +28,7 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
   };
 
   nix.gc = {
@@ -84,7 +84,7 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   environment.systemPackages = with pkgs; [
-    sddm-astronaut
+    #sddm-astronaut
     qpwgraph
     fish
     vim
