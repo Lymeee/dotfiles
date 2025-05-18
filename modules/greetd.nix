@@ -20,7 +20,7 @@ in {
 
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --user-menu --cmd Hyprland --theme ${tuigreetCfg}";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --user-menu --cmd Hyprland --theme ${lib.escapeShellArg tuigreetCfg}";
         user = "greeter";
       };
     };

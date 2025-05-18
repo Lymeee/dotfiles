@@ -9,15 +9,15 @@
 
   services.upower.enable = true;
 
-  #Enable Hyprland system-wide
+  # Enable Hyprland system-wide
   programs.hyprland = {
     enable = true;
     package = pkgs.hyprland;
   };
 
-  #Force session file to exist
+  # Force session file to exist
   environment.etc."wayland-sessions/hyprland.desktop".source =
-  "${pkgs.hyprland}/share/wayland-sessions/hyprland.desktop";
+    "${pkgs.hyprland}/share/wayland-sessions/hyprland.desktop";
 
   programs.fish.enable = true;
   users.users.lymee.shell = pkgs.fish;
@@ -27,8 +27,18 @@
 
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+    xdgOpenUsePortal = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk 
+    ];
+    wlr.enable = true; 
+  };
+
+  xdg.portal.config = {
+    "Hyprland" = {
+      default = [ "hyprland" "gtk" ];
+    };
   };
 
   nix.gc = {
@@ -54,6 +64,9 @@
   networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
 
   time.timeZone = "America/New_York";
+  time.hardwareClockInLocalTime = false;
+  services.timesyncd.enable = true;
+
 
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
@@ -76,21 +89,27 @@
   users.users.lymee = {
     isNormalUser = true;
     description = "Lymee";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "pipewire" ];
     packages = with pkgs; [];
   };
 
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.auto-optimise-store = true;
 
   environment.systemPackages = with pkgs; [
-    #sddm-astronaut
+    xdg-desktop-portal-hyprland
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
     qpwgraph
     fish
     vim
-  ];
 
-  nix.settings.auto-optimise-store = true;
+    (pkgs.writeShellScriptBin "xdg-open" ''
+      exec ${pkgs.glib}/bin/gio open "$@"
+    '')
+  ];
 
   system.stateVersion = "25.05";
 }
+

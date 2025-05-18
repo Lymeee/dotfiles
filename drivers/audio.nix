@@ -45,6 +45,9 @@
     end
   '';
 
+  # Set PulseAudio latency to avoid mic stutter (Discord fix)
+  environment.sessionVariables.PULSE_LATENCY_MSEC = "30";
+
   # Tools for audio control and debugging
   environment.systemPackages = with pkgs; [
     pipewire
@@ -54,6 +57,9 @@
     alsa-utils
   ];
 }
+
+
+
 
 
 

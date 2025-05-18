@@ -7,6 +7,7 @@
 
       env = XCURSOR_THEME, miku-cursor-linux
       env = XCURSOR_SIZE, 24
+      env = HYPRSHOT_DIR,/home/lymee/images/screenshots
 
       # Monitor Setup
       monitor=DP-2,2560x1440@360,0x0,1
@@ -30,11 +31,11 @@
       # Exec Keybinds
       bind = $mainMod, T, exec, kitty
       bind = $mainMod, F, exec, /home/lymee/bin/firefox-safe
-      bind = $mainMod, S, exec, steam
-      bind = $mainMod, D, exec, webcord
-      bind = $mainMod, A, exec, wofi -show drun
-      bind = $mainMod SHIFT, S, exec, hyprshot -m region -c --save-path /home/lymee/images/screenshots
-      bind = , Print, exec, hyprshot -m output -o DP-2 -c --save-path /home/lymee/images/screenshots
+      bind = $mainMod, S, exec, env -u TZ steam
+      bind = $mainMod, D, exec, discordcanary
+      bind = $mainMod, A, exec, wofi-miku
+      bind = $mainMod SHIFT, S, exec, hyprshot -m region -c -o /home/lymee/images/screenshots 
+      bind = , Print, exec, hyprshot -m output -o DP-2 -c -o /home/lymee/images/screenshots
 
       # Tiling / Window
       bind = $mainMod SHIFT, I, togglesplit,
@@ -118,7 +119,7 @@
       bind = CTRL SHIFT, j, resizeactive, 0 15
 
       # Rules
-      windowrulev2 = workspace 6 silent, class:^(webcord)$
+      windowrulev2 = workspace 6 silent, class:^(discord)$
       windowrulev2 = workspace 2 silent, class:^(steam)$
       windowrulev2 = workspace 2 silent, class:^(steam_app_.*)$
 

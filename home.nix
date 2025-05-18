@@ -10,7 +10,12 @@
     homeDirectory = "/home/lymee";
     stateVersion = "25.05";
   };
-  
+
+  home.sessionVariables = {
+    BROWSER = "firefox-developer-edition";
+    TZ = "America/New_York";
+    TZDIR = "${pkgs.tzdata}/share/zoneinfo";
+  };
 
   imports = [
     ./homemodules
@@ -37,7 +42,10 @@
     obs-studio
     vlc
     git
-    webcord
+    discord-canary
+    p7zip
+    unrar
+    tzdata
   ];
 
   programs.home-manager.enable = true;
