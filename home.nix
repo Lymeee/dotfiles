@@ -42,10 +42,11 @@
     obs-studio
     vlc
     git
-    discord-canary
+    discord
     p7zip
     unrar
     tzdata
+    bottles
   ];
 
   programs.home-manager.enable = true;

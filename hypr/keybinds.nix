@@ -32,7 +32,7 @@
       bind = $mainMod, T, exec, kitty
       bind = $mainMod, F, exec, /home/lymee/bin/firefox-safe
       bind = $mainMod, S, exec, env -u TZ steam
-      bind = $mainMod, D, exec, discordcanary
+      bind = $mainMod, D, exec, env PULSE_LATENCY_MSEC=30 discord
       bind = $mainMod, A, exec, wofi-miku
       bind = $mainMod SHIFT, S, exec, hyprshot -m region -c -o /home/lymee/images/screenshots 
       bind = , Print, exec, hyprshot -m output -o DP-2 -c -o /home/lymee/images/screenshots

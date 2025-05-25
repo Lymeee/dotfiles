@@ -1,10 +1,8 @@
 { pkgs, lib, ... }:
 
 {
-  # Required for real-time scheduling (important for low-latency audio)
   security.rtkit.enable = true;
 
-  # PipeWire configuration
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -12,7 +10,34 @@
     alsa.support32Bit = true;
     jack.enable = true;
 
-    # Custom PipeWire tuning for Scarlett Solo (or any USB interface)
+    wireplumber.configPackages = [
+      (pkgs.stdenv.mkDerivation {
+        pname = "wireplumber-nosuspend";
+        version = "1.0";
+
+        src = pkgs.writeTextDir "main.lua.d/90-disable-suspend.lua" ''
+          table.insert (policy.rules, {
+            matches = {
+              {
+                { "node.name", "matches", "alsa_input.usb-Focusrite_Scarlett_Solo_4th_Gen_*" }
+              },
+              {
+                { "node.name", "matches", "alsa_input.usb-Generic_USB_Audio*" }
+              }
+            },
+            apply_properties = {
+              ["session.suspend-timeout-seconds"] = 0,
+            }
+          })
+        '';
+
+        installPhase = ''
+          mkdir -p $out/share/wireplumber/main.lua.d
+          cp -r main.lua.d/* $out/share/wireplumber/main.lua.d/
+        '';
+      })
+    ];
+
     extraConfig.pipewire."95-scarlett-latency" = {
       "context.properties" = {
         default.clock.rate          = 48000;
@@ -26,29 +51,8 @@
     };
   };
 
-  # Disable suspend timeout for both playback and capture devices
-  environment.etc."wireplumber/main.lua.d/99-no-suspend.lua".text = ''
-    local rules = {
-      {
-        matches = {
-          { { "node.name", "matches", "alsa_output.*" } },
-          { { "node.name", "matches", "alsa_input.*" } },
-        },
-        apply_properties = {
-          ["session.suspend-timeout-seconds"] = 0,
-        },
-      },
-    }
-
-    for _, rule in ipairs(rules) do
-      table.insert(alsa_monitor.rules, rule)
-    end
-  '';
-
-  # Set PulseAudio latency to avoid mic stutter (Discord fix)
   environment.sessionVariables.PULSE_LATENCY_MSEC = "30";
 
-  # Tools for audio control and debugging
   environment.systemPackages = with pkgs; [
     pipewire
     wireplumber
@@ -57,6 +61,7 @@
     alsa-utils
   ];
 }
+
 
 
 

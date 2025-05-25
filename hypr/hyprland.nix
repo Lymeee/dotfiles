@@ -103,6 +103,7 @@
       layerrule = ignorezero, wofi
 
       exec-once = hyprpaper
+      exec-once = wpctl set-volume 48 1.0
     '';
   };
 
